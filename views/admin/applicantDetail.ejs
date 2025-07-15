@@ -34,7 +34,12 @@ Description: EJS view for detailed applicant CV
             <ul>
                 <% JSON.parse(applicant.experience).forEach(exp => { %>
                     <% if (exp.company || exp.role || exp.duration || exp.description) { %>
-                        <li><%= exp.company %> - <%= exp.role %> (<%= exp.duration %>): <%= exp.description %></li>
+                        <li>
+                          <% if (exp.company) { %><strong>Company:</strong> <%= exp.company %><br><% } %>
+                          <% if (exp.role) { %><strong>Role:</strong> <%= exp.role %><br><% } %>
+                          <% if (exp.duration) { %><strong>Duration:</strong> <%= exp.duration %><br><% } %>
+                          <% if (exp.description) { %><strong>Description:</strong> <%= exp.description %><% } %>
+                        </li>
                     <% } %>
                 <% }) %>
             </ul>
