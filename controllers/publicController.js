@@ -8,18 +8,21 @@ Description: Handles public job listing and application form
 const jobModel = require('../models/job');
 const applicantModel = require('../models/applicant');
 
+// Render public job list page
 exports.jobList = (req, res) => {
     jobModel.getAll((err, jobs) => {
         res.render('public/jobList', { jobs });
     });
 };
 
+// Render job application form for a specific job
 exports.applyPage = (req, res) => {
     jobModel.getById(req.params.jobId, (err, job) => {
         res.render('public/apply', { job });
     });
 };
 
+// Handle job application form submission
 exports.submitApplication = (req, res) => {
     const data = req.body;
     data.job_id = req.params.jobId;
