@@ -39,11 +39,6 @@ const publicRoutes = require('./routes/public');
 app.use('/admin', adminRoutes);
 app.use('/', publicRoutes);
 
-// Redirect root to job list (optional, if not already handled in publicRoutes)
-app.get('/', (req, res) => {
-    res.redirect('/jobs');
-});
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
