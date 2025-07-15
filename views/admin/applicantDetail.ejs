@@ -24,14 +24,18 @@ Description: EJS view for detailed applicant CV
         <li class="list-group-item"><strong>Education:</strong>
             <ul>
                 <% JSON.parse(applicant.education).forEach(edu => { %>
-                    <li><%= edu.school %> - <%= edu.degree %> (<%= edu.year %>)</li>
+                    <% if (edu.school || edu.degree || edu.year) { %>
+                        <li><%= edu.school %> - <%= edu.degree %> (<%= edu.year %>)</li>
+                    <% } %>
                 <% }) %>
             </ul>
         </li>
         <li class="list-group-item"><strong>Experience:</strong>
             <ul>
                 <% JSON.parse(applicant.experience).forEach(exp => { %>
-                    <li><%= exp.company %> - <%= exp.role %> (<%= exp.duration %>): <%= exp.description %></li>
+                    <% if (exp.company || exp.role || exp.duration || exp.description) { %>
+                        <li><%= exp.company %> - <%= exp.role %> (<%= exp.duration %>): <%= exp.description %></li>
+                    <% } %>
                 <% }) %>
             </ul>
         </li>
