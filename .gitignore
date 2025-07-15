@@ -1,0 +1,9 @@
+# Title: Git Ignore File
+# Author: Ahmed Ibrahim
+# Date: 2025-07-15
+# Description: Ignore environment, node_modules, and database files
+
+node_modules/
+.env
+*.sqlite
+*.db

@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.2",
+    "prettier": "^3.2.5"
+  },
+  "scripts": {
+    "dev": "nodemon app.js"
+  }
+}

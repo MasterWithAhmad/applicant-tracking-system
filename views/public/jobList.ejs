@@ -1,0 +1,42 @@
+<!--
+Title: Public Job List
+Author: Ahmed Ibrahim
+Date: 2025-07-15
+Description: EJS view for public job listing
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Openings</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body class="container">
+    <% title = "Available Jobs" %>
+    <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+        <h2>Available Jobs</h2>
+        <a href="/admin/login" class="btn btn-outline-secondary">Admin Login</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Apply</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% jobs.forEach(job => { %>
+                <tr>
+                    <td><%= job.title %></td>
+                    <td><%= job.description %></td>
+                    <td><%= job.deadline %></td>
+                    <td>
+                        <a href="/jobs/<%= job.id %>/apply" class="btn btn-primary btn-sm">Apply</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!--
+Title: Admin Login Page
+Author: Ahmed Ibrahim
+Date: 2025-07-15
+Description: EJS view for admin login
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body class="container">
+    <% title = "Admin Login" %>
+    <h2>Admin Login</h2>
+    <% if (error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <form method="POST" action="/admin/login">
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <button class="btn btn-primary">Login</button>
+    </form>
+</body>
+</html>
+</html>

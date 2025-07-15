@@ -1,0 +1,25 @@
+<!--
+Title: New Job Form
+Author: Ahmed Ibrahim
+Date: 2025-07-15
+Description: EJS view for creating a new job posting
+-->
+<% title = "Create Job" %>
+
+<h2 class="mt-4">Create New Job</h2>
+<form method="POST" action="/admin/jobs">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" name="title" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" name="description" class="form-control" rows="5" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="deadline" class="form-label">Deadline</label>
+        <input type="date" id="deadline" name="deadline" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Create</button>
+    <a href="/admin/dashboard" class="btn btn-secondary ms-2">Cancel</a>
+</form>

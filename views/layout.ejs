@@ -1,0 +1,47 @@
+<!--
+Title: Main Layout
+Author: Ahmed Ibrahim
+Date: 2025-07-15
+Description: EJS layout for consistent UI
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %> | Job System</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/">Job System</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Job Listings</a>
+                    </li>
+                    <% if (admin) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/logout">Logout</a>
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/login">Admin Login</a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <%- body %>
+    </div>
+    <footer class="footer mt-5 py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">&copy; 2025 Ahmed Ibrahim - Job System</span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!--
+Title: Applicants List
+Author: Ahmed Ibrahim
+Date: 2025-07-15
+Description: EJS view for listing applicants for a job
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applicants</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body class="container">
+    <% layout('layout') %>
+    <% title = "Applicants" %>
+    <h2>Applicants</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% applicants.forEach(applicant => { %>
+                <tr>
+                    <td><%= applicant.full_name %></td>
+                    <td><%= applicant.email %></td>
+                    <td><%= applicant.position %></td>
+                    <td>
+                        <a href="/admin/applicants/<%= applicant.id %>" class="btn btn-info btn-sm">View CV</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/admin/dashboard" class="btn btn-secondary">Back</a>
+</body>
+</html>

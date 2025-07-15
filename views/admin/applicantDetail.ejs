@@ -1,0 +1,42 @@
+<!--
+Title: Applicant Detail
+Author: Ahmed Ibrahim
+Date: 2025-07-15
+Description: EJS view for detailed applicant CV
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applicant Detail</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body class="container">
+    <% layout('layout') %>
+    <% title = "Applicant Detail" %>
+    <h2>Applicant CV</h2>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Name:</strong> <%= applicant.full_name %></li>
+        <li class="list-group-item"><strong>Email:</strong> <%= applicant.email %></li>
+        <li class="list-group-item"><strong>Phone:</strong> <%= applicant.phone %></li>
+        <li class="list-group-item"><strong>LinkedIn:</strong> <%= applicant.linkedin %></li>
+        <li class="list-group-item"><strong>Position Applied For:</strong> <%= applicant.position %></li>
+        <li class="list-group-item"><strong>Skills:</strong> <%= JSON.parse(applicant.skills).join(', ') %></li>
+        <li class="list-group-item"><strong>Cover Letter:</strong> <%= applicant.cover_letter %></li>
+        <li class="list-group-item"><strong>Education:</strong>
+            <ul>
+                <% JSON.parse(applicant.education).forEach(edu => { %>
+                    <li><%= edu.school %> - <%= edu.degree %> (<%= edu.year %>)</li>
+                <% }) %>
+            </ul>
+        </li>
+        <li class="list-group-item"><strong>Experience:</strong>
+            <ul>
+                <% JSON.parse(applicant.experience).forEach(exp => { %>
+                    <li><%= exp.company %> - <%= exp.role %> (<%= exp.duration %>): <%= exp.description %></li>
+                <% }) %>
+            </ul>
+        </li>
+    </ul>
+    <a href="/admin/dashboard" class="btn btn-secondary mt-3">Back</a>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<% title = "Admin Dashboard" %>
+<h2>Job Postings</h2>
+<a href="/admin/jobs/new" class="btn btn-success mb-3">Create New Job</a>
+<a href="/admin/logout" class="btn btn-secondary mb-3 float-end">Logout</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Deadline</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% jobs.forEach(job => { %>
+            <tr>
+                <td><%= job.title %></td>
+                <td><%= job.deadline %></td>
+                <td>
+                    <a href="/admin/jobs/<%= job.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
+                    <form method="POST" action="/admin/jobs/<%= job.id %>/delete" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    <a href="/admin/jobs/<%= job.id %>/applicants" class="btn btn-info btn-sm">Applicants</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

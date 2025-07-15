@@ -1,0 +1,126 @@
+<!--
+Title: Application Form
+Author: Ahmed Ibrahim
+Date: 2025-07-15
+Description: EJS view for public application form
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apply for <%= job.title %></title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <script>
+        // Helper JS to add multiple education/experience/skills
+        function addField(section, fields) {
+            const container = document.getElementById(section);
+            const div = document.createElement('div');
+            fields.forEach(f => {
+                div.innerHTML += `<input type="text" name="${section}[${container.children.length}][${f}]" class="form-control mb-1" placeholder="${f}" required>`;
+            });
+            container.appendChild(div);
+        }
+        function addSkill() {
+            const container = document.getElementById('skills');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'skills[]';
+            input.className = 'form-control mb-1';
+            input.placeholder = 'Skill';
+            container.appendChild(input);
+        }
+    </script>
+</head>
+<body class="container">
+<% layout('layout') %>
+<% title = "Apply for " + job.title %>
+    <h2>Apply for <%= job.title %></h2>
+    <form method="POST" action="/jobs/<%= job.id %>/apply" onsubmit="return prepareData()">
+        <div class="mb-3">
+            <label>Full Name</label>
+            <input type="text" name="full_name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Email Address</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Phone Number</label>
+            <input type="text" name="phone" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>LinkedIn Profile (optional)</label>
+            <input type="text" name="linkedin" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label>Education History</label>
+            <div id="education"></div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="addField('education', ['school', 'degree', 'year'])">Add Education</button>
+        </div>
+        <div class="mb-3">
+            <label>Work Experience</label>
+            <div id="experience"></div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="addField('experience', ['company', 'role', 'duration', 'description'])">Add Experience</button>
+        </div>
+        <div class="mb-3">
+            <label>Skills</label>
+            <div id="skills"></div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="addSkill()">Add Skill</button>
+        </div>
+        <div class="mb-3">
+            <label>Cover Letter / Personal Statement</label>
+            <textarea name="cover_letter" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label>Position Applied For</label>
+            <select name="position" class="form-control" required>
+                <option value="<%= job.title %>"><%= job.title %></option>
+            </select>
+        </div>
+        <input type="hidden" name="education" id="educationData">
+        <input type="hidden" name="experience" id="experienceData">
+        <input type="hidden" name="skills" id="skillsData">
+        <button class="btn btn-primary">Submit Application</button>
+    </form>
+    <script>
+        function prepareData() {
+            // Gather education
+            const eduArr = [];
+            document.querySelectorAll('#education > div').forEach(div => {
+                const inputs = div.querySelectorAll('input');
+                if (inputs.length === 3) {
+                    eduArr.push({
+                        school: inputs[0].value,
+                        degree: inputs[1].value,
+                        year: inputs[2].value
+                    });
+                }
+            });
+            document.getElementById('educationData').value = JSON.stringify(eduArr);
+
+            // Gather experience
+            const expArr = [];
+            document.querySelectorAll('#experience > div').forEach(div => {
+                const inputs = div.querySelectorAll('input');
+                if (inputs.length === 4) {
+                    expArr.push({
+                        company: inputs[0].value,
+                        role: inputs[1].value,
+                        duration: inputs[2].value,
+                        description: inputs[3].value
+                    });
+                }
+            });
+            document.getElementById('experienceData').value = JSON.stringify(expArr);
+
+            // Gather skills
+            const skillsArr = [];
+            document.querySelectorAll('#skills input').forEach(input => {
+                if (input.value) skillsArr.push(input.value);
+            });
+            document.getElementById('skillsData').value = JSON.stringify(skillsArr);
+
+            return true;
+        }
+    </script>
+</body>
+</html>
