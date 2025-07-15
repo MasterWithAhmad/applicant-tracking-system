@@ -24,8 +24,20 @@ exports.submitApplication = (req, res) => {
     const data = req.body;
     data.job_id = req.params.jobId;
     // Parse education, experience, skills from form
-    data.education = JSON.parse(data.education);
-    data.experience = JSON.parse(data.experience);
-    data.skills = JSON.parse(data.skills);
+    function safeParse(val) {
+        if (!val) return [];
+        if (typeof val === 'string') {
+            try {
+                return JSON.parse(val);
+            } catch (e) {
+                return [];
+            }
+        }
+        if (typeof val === 'object') return val;
+        return [];
+    }
+    data.education = safeParse(data.education);
+    data.experience = safeParse(data.experience);
+    data.skills = safeParse(data.skills);
     applicantModel.create(data, () => res.render('public/success'));
 };
