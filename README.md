@@ -15,7 +15,7 @@ A simple job application system with public job listings and an admin dashboard.
    ```
    ADMIN_USER=admin
    ADMIN_PASS=admin123
-   DB_PATH=./jobs.db
+   DB_PATH=./database.sqlite
    ```
 4. Seed the database:
    - `node seedJobs.js`   
